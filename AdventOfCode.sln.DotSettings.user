@@ -1,0 +1,37 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=70c2c367_002D3ce6_002D421d_002D919b_002Ded02ff9ea0d8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day3&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day4&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day5&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c4aad0e8_002Dd538_002D42ae_002D9d39_002D7766985b2f53/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e2613d70_002De329_002D428e_002D8a77_002D6ce4a64a6f13/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f20c434a_002Dec3a_002D4e18_002Daf82_002Dfd1343cf8a8f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day3&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day4&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day5&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day9&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day8&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day7&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day6&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
