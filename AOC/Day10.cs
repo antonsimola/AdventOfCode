@@ -1,4 +1,4 @@
-﻿using MathNet.Spatial.Euclidean;
+using MathNet.Spatial.Euclidean;
 
 namespace AOC;
 
@@ -17,8 +17,7 @@ record P(int Y, int X);
 
 record PD(P point, Direction direction);
 
-
-public class Day10
+public class Day10 : BaseDay
 {
     Dictionary<char, Direction> PipeConnectionTypes = new()
     {
@@ -48,8 +47,10 @@ public class Day10
     };
 
 
-    public void Run(string[] input)
+    public override void Run()
     {
+        var input = Input;
+
         char[][] arr = input.Select(i => i.AsEnumerable().ToArray()).ToArray();
 
 
@@ -67,11 +68,12 @@ public class Day10
 
                 x++;
             }
+
             y++;
         }
 
         var startDirs = DetermineStartingDirections(arr, start);
-        
+
         var minimalDistance = 0;
 
         var cur0 = new PD(start, startDirs[0]);
@@ -113,18 +115,19 @@ public class Day10
                         locations.Add(testY);
                     }
                 }
+
                 x++;
             }
+
             y++;
         }
 
-        TestContext.Out.WriteLine("Minimal distance " + minimalDistance);
-        TestContext.Out.WriteLine("Animal Locations " + locations.Count);
+        Console.WriteLine("Minimal distance " + minimalDistance);
+        Console.WriteLine("Animal Locations " + locations.Count);
     }
 
     private bool WithinPolygon(Polygon2D polygon, P p)
     {
-        
         return polygon.EnclosesPoint(new Point2D(p.X - 0.5, p.Y - 0.5));
     }
 
@@ -186,7 +189,7 @@ public class Day10
                 return true;
             }
         }
-        
+
         return false;
     }
 
