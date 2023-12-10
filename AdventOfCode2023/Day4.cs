@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace AOC;
+namespace AdventOfCode2023;
 
 public class Day4 : BaseDay
 {
@@ -13,8 +13,9 @@ public class Day4 : BaseDay
         //var input = TestInput;
         var grandSum = 0;
         var initialCards = new List<Card>();
-        var copyCards = new ConcurrentDictionary<int, List<Card>>();
-
+        var copyCards = new Dictionary<int, List<Card>>();
+        
+        
         foreach (var line in input)
         {
             var split = line.Split(":");

@@ -2,7 +2,7 @@
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
 
-namespace AOC;
+namespace AdventOfCode2023;
 
 public abstract class BaseDay
 {

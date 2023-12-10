@@ -1,7 +1,7 @@
 using System.Text;
 using Combinatorics.Collections;
 
-namespace AOC;
+namespace AdventOfCode2023;
 
 public class Day7 : BaseDay
 {

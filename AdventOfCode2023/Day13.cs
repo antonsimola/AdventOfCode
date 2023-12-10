@@ -1,4 +1,4 @@
-namespace AOC;
+namespace AdventOfCode2023;
 public class Day13 : BaseDay
 {
  
