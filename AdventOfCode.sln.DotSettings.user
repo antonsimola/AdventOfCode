@@ -1,4 +1,13 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ABaseDay_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ADay1_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ADay10_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ADay11_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ADay2_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003ADay9_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003AGlobalUsings_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003AHelpers_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=1F5F471F_002D8D46_002D405E_002D9B55_002DF898730E8C66_002Ff_003AProgram_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=12897ec6_002Dab25_002D4230_002D9d9f_002D9128c11fe5c6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Day10" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1F5F471F-8D46-405E-9B55-F898730E8C66::net8.0::AOC.Aoc2023.Day10&lt;/TestId&gt;&#xD;
