@@ -6,7 +6,7 @@ namespace AOC;
 
 public abstract class BaseDay
 {
-     public string[] TestInput;
+    public string[] TestInput;
     public List<string[]> AllTestInputs;
     public string[] Input;
 
@@ -17,7 +17,7 @@ public abstract class BaseDay
     {
         Console.WriteLine(o);
     }
-    
+
     public void Setup()
     {
         var testName = this.GetType().Name;
