@@ -21,4 +21,16 @@ public static class Helpers
     {
         return line.Split(separator).Select(long.Parse).ToList();
     }
+    
+    
+   public static IEnumerable<TEnum> IterFlags<TEnum>(TEnum d) where TEnum : struct, Enum
+    {
+        foreach (var f in Enum.GetValues<TEnum>())
+        {
+            if (d.HasFlag(f))
+            {
+                yield return f;
+            }
+        }
+    }
 }

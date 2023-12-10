@@ -1,4 +1,5 @@
 using MathNet.Spatial.Euclidean;
+using static AOC.Helpers;
 
 namespace AOC;
 
@@ -13,7 +14,7 @@ enum Direction
     West = 1 << 3
 }
 
-record P(int Y, int X);
+record P(int Y, int X); //bleh...
 
 record PD(P point, Direction direction);
 
@@ -40,10 +41,10 @@ public class Day10 : BaseDay
 
     Dictionary<Direction, P> Shifts = new()
     {
-        { North, new P(-1, 0) },
-        { West, new P(0, -1) },
-        { East, new P(0, 1) },
-        { South, new P(1, 0) },
+        { North, new (-1, 0) },
+        { West, new (0, -1) },
+        { East, new (0, 1) },
+        { South, new (1, 0) },
     };
 
 
@@ -63,7 +64,7 @@ public class Day10 : BaseDay
             {
                 if (col == 'S')
                 {
-                    start = new P(y, x);
+                    start = new (y, x);
                 }
 
                 x++;
@@ -72,7 +73,7 @@ public class Day10 : BaseDay
             y++;
         }
 
-        var startDirs = DetermineStartingDirections(arr, start);
+        var startDirs = GetStartingDirections(arr, start);
 
         var minimalDistance = 0;
 
@@ -99,7 +100,7 @@ public class Day10 : BaseDay
         //Part 2
         other.Reverse();
         polygon.AddRange(other);
-        var mathP = new Polygon2D(polygon.Select(p => new Point2D(p.X, p.Y)));
+        var mathNetPoly = new Polygon2D(polygon.Select(p => new Point2D(p.X, p.Y)));
         var locations = new HashSet<P>();
         y = 0;
         foreach (var row in arr)
@@ -110,7 +111,7 @@ public class Day10 : BaseDay
                 var testY = new P(y, x);
                 if (!polygon.Contains(testY))
                 {
-                    if (WithinPolygon(mathP, testY))
+                    if (WithinPolygon(mathNetPoly, testY))
                     {
                         locations.Add(testY);
                     }
@@ -132,7 +133,7 @@ public class Day10 : BaseDay
     }
 
 
-    private List<Direction> DetermineStartingDirections(char[][] arr, P? start)
+    private List<Direction> GetStartingDirections(char[][] arr, P start)
     {
         var dirs = new List<Direction>();
         foreach (var dir in Enum.GetValues<Direction>())
@@ -141,7 +142,7 @@ public class Day10 : BaseDay
             var next = new P(start.Y + shift.Y, start.X + shift.X);
             var nextChar = SafeGet(arr, next);
             if (nextChar == '.') continue;
-            if (CanBeConnectFrom(dir, nextChar))
+            if (CanBeConnectedFrom(dir, nextChar))
             {
                 dirs.Add(dir);
             }
@@ -167,18 +168,8 @@ public class Day10 : BaseDay
     }
 
 
-    IEnumerable<Direction> IterFlags(Direction d)
-    {
-        foreach (var f in Enum.GetValues<Direction>())
-        {
-            if (d.HasFlag(f))
-            {
-                yield return f;
-            }
-        }
-    }
 
-    bool CanBeConnectFrom(Direction direction, char to)
+    bool CanBeConnectedFrom(Direction direction, char to)
     {
         var dirs = PipeConnectionTypes[to];
 
@@ -205,7 +196,7 @@ public class Day10 : BaseDay
                 var next = new P(point.Y + shift.Y, point.X + shift.X);
                 var nextChar = SafeGet(arr, next);
                 if (nextChar == '.') continue;
-                if (CanBeConnectFrom(dir, nextChar) && dir != arriveFrom)
+                if (CanBeConnectedFrom(dir, nextChar) && dir != arriveFrom)
                 {
                     return new PD(next, Opposites[dir]);
                 }
