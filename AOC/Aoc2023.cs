@@ -83,7 +83,7 @@ public class Aoc2023
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(p));
             }
-            
+
             var question = DownloadQuestion(year, day);
             File.WriteAllText(p, question);
         }
@@ -101,6 +101,7 @@ public class Aoc2023
     {
         TestContext.Out.Write(o);
     }
+
 
     //[Test]
     public void CodeGen()
@@ -230,8 +231,9 @@ public class Aoc2023
 
         WriteLine(sum);
     }
-    
+
     record FoundNumber(int Row, int Index, int Length, int Number);
+
     record SpecialCharacter(int Row, int Index, int Length, string Value);
 
     [Test]
@@ -290,7 +292,7 @@ public class Aoc2023
                 var s = special.Index;
                 var r = special.Row;
                 if (bbXStart <= s && s <= bbXEnd
-                 && bbYStart <= r && r <= bbYEnd
+                                  && bbYStart <= r && r <= bbYEnd
                    )
                 {
                     sum += number.Number;
@@ -327,7 +329,7 @@ public class Aoc2023
                 gearRatio += touchedNumbers[0] * touchedNumbers[1];
             }
         }
-        
+
         WriteLine(sum);
         WriteLine(gearRatio);
     }
@@ -660,8 +662,6 @@ public class Aoc2023
         var instructions = input[0];
 
 
-        string startNode = null;
-
         var nodes = new List<Node>();
 
         foreach (var l in input.Skip(2))
@@ -670,11 +670,6 @@ public class Aoc2023
             var nexts = s[1].Split(", ");
             var left = nexts[0].Substring(1, 3);
             var right = nexts[1].Substring(0, 3);
-            if (startNode == null)
-            {
-                startNode = s[0];
-            }
-
             var cur = s[0];
             var n = new Node(null, null, left, right, cur);
             nodes.Add(n);
@@ -746,7 +741,7 @@ public class Aoc2023
             return b;
         return GreatestCommonDivisor(b % a, a);
     }
-    
+
     static long LeastCommonMultiple(long a, long b)
     {
         return (a / GreatestCommonDivisor(a, b)) * b;
@@ -760,9 +755,8 @@ public class Aoc2023
         var seqs = new List<List<int>>();
         foreach (var line in input)
         {
-            seqs.Add(line.Split(" ").Select(int.Parse).ToList());
+            seqs.Add(line.ParseIntList());
         }
-
 
         var sum = 0;
         foreach (var seq in seqs)
@@ -809,6 +803,13 @@ public class Aoc2023
     public void Day10()
     {
         var input = Input;
+
+        // new Day10().Run(input);
+
+        new Day10().Run(AllTestInputs[9]);
+        new Day10().Run(AllTestInputs[12]);
+        new Day10().Run(AllTestInputs[14]);
+         new Day10().Run(AllTestInputs[AllTestInputs.Count -2]);
         //var input = TestInput;
     }
 
