@@ -1,4 +1,4 @@
-namespace AOC;
+namespace AdventOfCode2023;
 
 public class Day11 : BaseDay
 {
@@ -6,5 +6,6 @@ public class Day11 : BaseDay
     {
         var input = Input;
         //var input = TestInput;
+        
     }
 }

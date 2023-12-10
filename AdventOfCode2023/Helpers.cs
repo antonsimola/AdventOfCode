@@ -1,4 +1,4 @@
-﻿namespace AOC;
+﻿namespace AdventOfCode2023;
 
 public static class Helpers
 {
@@ -32,5 +32,16 @@ public static class Helpers
                 yield return f;
             }
         }
+    }
+
+    public static TValue GetOrAdd<TKey,TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> adderFunction)
+    {
+        if (dictionary.TryGetValue(key, out var v))
+        {
+            return v;
+        }
+        var newV = adderFunction(key);
+        dictionary[key] = newV;
+        return newV;
     }
 }

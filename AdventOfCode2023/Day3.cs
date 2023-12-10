@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace AOC;
+namespace AdventOfCode2023;
 
 public class Day3 : BaseDay
 {

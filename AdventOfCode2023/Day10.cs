@@ -1,7 +1,7 @@
 using MathNet.Spatial.Euclidean;
-using static AOC.Helpers;
+using static AdventOfCode2023.Helpers;
 
-namespace AOC;
+namespace AdventOfCode2023;
 
 using static Direction;
 
