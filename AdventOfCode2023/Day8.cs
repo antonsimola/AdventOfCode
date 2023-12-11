@@ -69,12 +69,6 @@ public class Day8 : BaseDay
                     }
 
                     cNode = n;
-
-                    if (count % 10_000_000 == 0)
-                    {
-                        Console.Write($"Count : {count} ");
-                        WriteLine(string.Join(" ", currentNodes.Select(c => c.Cur)));
-                    }
                 }
             }
 

@@ -6,9 +6,8 @@ public class Day2 : BaseDay
     {
         var input = Input;
         //var input = TestInput;
-        var text = input;
         var sum = 0;
-        foreach (var line in text)
+        foreach (var line in input)
         {
             var a = line.Split(":");
             var id = int.Parse(a[0].Split(" ")[1]);

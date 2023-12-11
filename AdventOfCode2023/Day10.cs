@@ -52,7 +52,7 @@ public class Day10 : BaseDay
     {
         var input = Input;
 
-        char[][] arr = input.Select(i => i.AsEnumerable().ToArray()).ToArray();
+        char[][] arr = input.Select(i => i.ToArray()).ToArray();
 
 
         var y = 0;

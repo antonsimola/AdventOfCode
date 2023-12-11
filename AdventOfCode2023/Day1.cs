@@ -8,7 +8,6 @@ public class Day1 : BaseDay
     {
         var input = Input;
         //var input = TestInput;
-        var text = input;
 
         var stringValues = new Dictionary<Regex, int>()
         {
@@ -32,7 +31,7 @@ public class Day1 : BaseDay
             { new Regex("9"), 9 },
         };
         var sum = 0;
-        foreach (var line in text)
+        foreach (var line in input)
         {
             var min = int.MaxValue;
             var minVal = 0;
