@@ -23,6 +23,17 @@ public static class Helpers
     }
     
     
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
+    {
+        return enumerable.Where(t  => t != null);
+    }
+    
+    public static IEnumerable<(T v, int i)> WithIndex<T>(this IEnumerable<T> enumerable)
+    {
+        return enumerable.Select((v, i) => (v: v, i: i));
+    }
+
+    
    public static IEnumerable<TEnum> IterFlags<TEnum>(TEnum d) where TEnum : struct, Enum
     {
         foreach (var f in Enum.GetValues<TEnum>())
