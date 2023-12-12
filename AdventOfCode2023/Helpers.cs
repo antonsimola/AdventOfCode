@@ -58,21 +58,21 @@ public static class Helpers
         return newV;
     }
     
-    public static IEnumerable<IList<char>> CombineWithRepetitions(this IEnumerable<char> input, int take)
+    public static IEnumerable<IList<T>> CombineWithRepetitions<T>(this IEnumerable<T> input, int take)
     {
-        ICollection<IList<char>> output = new Collection<IList<char>>();
-        IList<char> item = new char[take];
+        ICollection<IList<T>> output = new Collection<IList<T>>();
+        IList<T> item = new T[take];
 
         CombineWithRepetitions(output, input, item, 0);
 
         return output;
     }
 
-    private static void CombineWithRepetitions(ICollection<IList<char>> output, IEnumerable<char> input, IList<char> item, int count)
+    private static void CombineWithRepetitions<T>(ICollection<IList<T>> output, IEnumerable<T> input, IList<T> item, int count)
     {
         if (count < item.Count)
         {
-            var enumerable = input as IList<char> ?? input.ToList();
+            var enumerable = input as IList<T> ?? input.ToList();
             foreach (var symbol in enumerable)
             {
                 item[count] = symbol;
@@ -81,7 +81,7 @@ public static class Helpers
         }
         else
         {
-            output.Add(new List<char>(item));
+            output.Add(new List<T>(item));
         }
     }
 }
