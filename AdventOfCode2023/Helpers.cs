@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode2023;
+﻿using System.Collections.ObjectModel;
+
+namespace AdventOfCode2023;
 
 public static class Helpers
 {
@@ -23,9 +25,9 @@ public static class Helpers
     }
     
     
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
     {
-        return enumerable.Where(t  => t != null);
+        return enumerable.Where(t  => t != null).Cast<T>();
     }
     
     public static IEnumerable<(T v, int i)> WithIndex<T>(this IEnumerable<T> enumerable)
@@ -54,5 +56,32 @@ public static class Helpers
         var newV = adderFunction(key);
         dictionary[key] = newV;
         return newV;
+    }
+    
+    public static IEnumerable<IList<char>> CombineWithRepetitions(this IEnumerable<char> input, int take)
+    {
+        ICollection<IList<char>> output = new Collection<IList<char>>();
+        IList<char> item = new char[take];
+
+        CombineWithRepetitions(output, input, item, 0);
+
+        return output;
+    }
+
+    private static void CombineWithRepetitions(ICollection<IList<char>> output, IEnumerable<char> input, IList<char> item, int count)
+    {
+        if (count < item.Count)
+        {
+            var enumerable = input as IList<char> ?? input.ToList();
+            foreach (var symbol in enumerable)
+            {
+                item[count] = symbol;
+                CombineWithRepetitions(output, enumerable, item, count + 1);
+            }
+        }
+        else
+        {
+            output.Add(new List<char>(item));
+        }
     }
 }

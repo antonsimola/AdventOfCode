@@ -22,9 +22,10 @@ public class Day11 : BaseDay
             .Where(i => i >= 0)
             .ToList();
         
-        List<Cell?> galaxies = grid
+        List<Cell> galaxies = grid
             .SelectMany((r, i) =>
-                r.Select((c, j) => c == '#' ? new Cell(i, j) : null).WhereNotNull()
+                r.Select((c, j) => c == '#' ? new Cell(i, j) : null)
+                .WhereNotNull()
             ).ToList();
 
         long grandSum = 0;
@@ -39,7 +40,7 @@ public class Day11 : BaseDay
                 }
 
                 var pair = (g1, g2);
-                if (pairs.Contains((g2, g1)) || pairs.Contains((g1, g2)))
+                if (pairs.Contains((g2, g1)))
                 {
                     continue;
                 }
