@@ -84,4 +84,19 @@ public static class Helpers
             output.Add(new List<T>(item));
         }
     }
+
+    public static  long Factorial(long n)
+    {
+        if (n == 1)
+        {
+            return 1;
+        }
+
+        return n * Factorial(n - 1);
+    }
+    
+    public static  long CombinationsWithRepetitionCount(long sampleSize, long totalCount)
+    {
+        return Factorial(sampleSize + totalCount - 1) / (Factorial(sampleSize) * Factorial(totalCount -1));
+    }
 }
