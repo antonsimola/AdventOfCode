@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text;
 
 namespace AdventOfCode2023;
 
@@ -13,7 +14,7 @@ public static class Helpers
     {
         return line.Split(separator).Select(int.Parse).ToList();
     }
-    
+
     public static long[] ParseLongArray(this string line, string separator = " ")
     {
         return line.Split(separator).Select(long.Parse).ToArray();
@@ -23,20 +24,20 @@ public static class Helpers
     {
         return line.Split(separator).Select(long.Parse).ToList();
     }
-    
-    
+
+
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
     {
-        return enumerable.Where(t  => t != null).Cast<T>();
+        return enumerable.Where(t => t != null).Cast<T>();
     }
-    
+
     public static IEnumerable<(T v, int i)> WithIndex<T>(this IEnumerable<T> enumerable)
     {
         return enumerable.Select((v, i) => (v: v, i: i));
     }
 
-    
-   public static IEnumerable<TEnum> IterFlags<TEnum>(TEnum d) where TEnum : struct, Enum
+
+    public static IEnumerable<TEnum> IterFlags<TEnum>(TEnum d) where TEnum : struct, Enum
     {
         foreach (var f in Enum.GetValues<TEnum>())
         {
@@ -47,28 +48,38 @@ public static class Helpers
         }
     }
 
-    public static TValue GetOrAdd<TKey,TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> adderFunction)
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
+        Func<TKey, TValue> adderFunction)
     {
         if (dictionary.TryGetValue(key, out var v))
         {
             return v;
         }
+
         var newV = adderFunction(key);
         dictionary[key] = newV;
         return newV;
     }
-    
-    public static IEnumerable<IList<T>> CombineWithRepetitions<T>(this IEnumerable<T> input, int take)
+
+    public static IEnumerable<IList<T>> CombineWithRepetitions<T>(this IEnumerable<T> input, int take,
+        IDictionary<string, ICollection<IList<T>>> cache)
     {
+        var cacheKey = string.Join("", input) + take;
+        if (cache.TryGetValue(cacheKey, out var v))
+        {
+            return v;
+        }
+
         ICollection<IList<T>> output = new Collection<IList<T>>();
         IList<T> item = new T[take];
 
         CombineWithRepetitions(output, input, item, 0);
-
+        cache[cacheKey] = output;
         return output;
     }
 
-    private static void CombineWithRepetitions<T>(ICollection<IList<T>> output, IEnumerable<T> input, IList<T> item, int count)
+    private static void CombineWithRepetitions<T>(ICollection<IList<T>> output, IEnumerable<T> input, IList<T> item,
+        int count)
     {
         if (count < item.Count)
         {
@@ -85,7 +96,7 @@ public static class Helpers
         }
     }
 
-    public static  long Factorial(long n)
+    public static long Factorial(long n)
     {
         if (n == 1)
         {
@@ -94,9 +105,27 @@ public static class Helpers
 
         return n * Factorial(n - 1);
     }
-    
-    public static  long CombinationsWithRepetitionCount(long sampleSize, long totalCount)
+
+    public static long CombinationsWithRepetitionCount(long sampleSize, long totalCount)
     {
-        return Factorial(sampleSize + totalCount - 1) / (Factorial(sampleSize) * Factorial(totalCount -1));
+        return Factorial(sampleSize + totalCount - 1) / (Factorial(sampleSize) * Factorial(totalCount - 1));
+    }
+
+    public static string[] ColumnWise(this string[] grid)
+    {
+        var columnWise = new List<string>();
+
+        for (var i = 0; i < grid[0].Length; i++)
+        {
+            var sb = new StringBuilder();
+            foreach (var line in grid)
+            {
+                sb.Append(line[i]);
+            }
+
+            columnWise.Add(sb.ToString());
+        }
+
+        return columnWise.ToArray();
     }
 }

@@ -1,10 +1,12 @@
 using System.Text;
-using Combinatorics.Collections;
 
 namespace AdventOfCode2023;
 
 public class Day12 : BaseDay
 {
+    private Dictionary<string, ICollection<IList<char>>> Cache = new ();
+    
+    //TODO brute force, takes years on full input. Memoization? Split into unknown parts and known parts
     public override void Run()
     {
         // var input = Input;
@@ -14,11 +16,13 @@ public class Day12 : BaseDay
         foreach (var line in input)
         {
             var split = line.Split(" ");
-            var records = split[0];
-            // var records = string.Join("?", Enumerable.Range(0, 5).Select(i => split[0]));
+            // var records = split[0];
+            var records = string.Join("?", Enumerable.Range(0, 5).Select(i => split[0]));
             var checks = split[1].ParseIntList(",");
-            // checks = Enumerable.Range(0, 5).Select(i => checks).Aggregate((a, b) => a.Concat(b).ToList());
+            checks = Enumerable.Range(0, 5).Select(i => checks).Aggregate((a, b) => a.Concat(b).ToList());
 
+
+            var grouped = GroupIntoKnownsAndUnknowns(records);
 
             var checksCount = checks.Sum();
 
@@ -71,20 +75,44 @@ public class Day12 : BaseDay
             }
 
             grandSum += sum;
-             Console.WriteLine("Done this round");
+            Console.WriteLine("Done this round");
 
-             progress++;
+            progress++;
         }
 
         Console.WriteLine("--------");
         Console.WriteLine(grandSum);
     }
-    
+
+    private List<string> GroupIntoKnownsAndUnknowns(string records)
+    {
+        var parts = new List<string>();
+        var currentPart = "";
+        char prev = records[0];
+        foreach (var c in records.Skip(1))
+        {
+            if (prev == '?' && c != '?')
+            {
+                parts.Add(currentPart);
+                currentPart = "";
+            }
+            else if (prev != '?' && c == '?')
+            {
+                parts.Add(currentPart);
+                currentPart = "";
+            }
+
+            prev = c;
+            currentPart += c;
+        }
+
+
+        return parts;
+    }
+
 
     public IEnumerable<string> Generate(string s)
     {
-
-
         var jokerLocations = new List<int>();
         var i = 0;
 
@@ -100,7 +128,7 @@ public class Day12 : BaseDay
 
         char[] chars = ['#', '.'];
         var res = new List<string>();
-        var combines =  chars.CombineWithRepetitions(jokerLocations.Count);
+        var combines = chars.CombineWithRepetitions(jokerLocations.Count, Cache);
 
         foreach (var set in combines)
         {
@@ -115,6 +143,5 @@ public class Day12 : BaseDay
         }
 
         return res;
-     
     }
 }

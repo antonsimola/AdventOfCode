@@ -83,17 +83,7 @@ public class Day13 : BaseDay
     private Res Test(string[] grid, Res? original)
     {
         var res = new Res();
-        var columnWise = new List<string>();
-        for (var i = 0; i < grid[0].Length; i++)
-        {
-            var sb = new StringBuilder();
-            foreach (var line in grid)
-            {
-                sb.Append(line[i]);
-            }
-
-            columnWise.Add(sb.ToString());
-        }
+        var columnWise = grid.ColumnWise();
 
         var rowInd = MirrorCheck(grid, original?.Row ?? -1);
         if (rowInd > -1)
