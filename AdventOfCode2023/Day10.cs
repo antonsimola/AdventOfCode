@@ -4,19 +4,7 @@ using static AdventOfCode2023.Helpers;
 namespace AdventOfCode2023;
 
 using static Direction;
-
-[Flags]
-enum Direction
-{
-    North = 1 << 0,
-    East = 1 << 1,
-    South = 1 << 2,
-    West = 1 << 3
-}
-
-record P(int Y, int X); //bleh...
-
-record PD(P point, Direction direction);
+using static GridMovement;
 
 public class Day10 : BaseDay
 {
@@ -30,23 +18,6 @@ public class Day10 : BaseDay
         { 'F', South | East },
         { 'S', South | East | North | West },
     };
-
-    Dictionary<Direction, Direction> Opposites = new()
-    {
-        { North, South },
-        { West, East },
-        { East, West },
-        { South, North },
-    };
-
-    Dictionary<Direction, P> Shifts = new()
-    {
-        { North, new (-1, 0) },
-        { West, new (0, -1) },
-        { East, new (0, 1) },
-        { South, new (1, 0) },
-    };
-
 
     public override void Run()
     {
@@ -79,28 +50,28 @@ public class Day10 : BaseDay
 
         var cur0 = new PD(start, startDirs[0]);
         var cur1 = new PD(start, startDirs[1]);
-        var polygon = new List<P>() { cur0.point };
+        var polygon = new List<P>() { cur0.Point };
         var other = new List<P>();
         while (true)
         {
             minimalDistance++;
-            cur0 = MoveInPipe(arr, cur0.point, cur0.direction);
-            cur1 = MoveInPipe(arr, cur1.point!, cur1.direction);
+            cur0 = MoveInPipe(arr, cur0.Point, cur0.Dir);
+            cur1 = MoveInPipe(arr, cur1.Point!, cur1.Dir);
 
-            if (cur0.point == cur1.point)
+            if (cur0.Point == cur1.Point)
             {
-                polygon.Add(cur0.point);
+                polygon.Add(cur0.Point);
                 break;
             }
 
-            polygon.Add(cur0.point);
-            other.Add(cur1.point);
+            polygon.Add(cur0.Point);
+            other.Add(cur1.Point);
         }
 
         //Part 2
         other.Reverse();
         polygon.AddRange(other);
-        var mathNetPoly = new Polygon2D(polygon.Select(p => new Point2D(p.X, p.Y)));
+        var mathNetPoly = new Polygon2D(polygon.Select(p => new Point2D(p.Col, p.Row)));
         var locations = new HashSet<P>();
         y = 0;
         foreach (var row in arr)
@@ -129,7 +100,7 @@ public class Day10 : BaseDay
 
     private bool WithinPolygon(Polygon2D polygon, P p)
     {
-        return polygon.EnclosesPoint(new Point2D(p.X - 0.5, p.Y - 0.5));
+        return polygon.EnclosesPoint(new Point2D(p.Col - 0.5, p.Row - 0.5));
     }
 
 
@@ -139,7 +110,7 @@ public class Day10 : BaseDay
         foreach (var dir in Enum.GetValues<Direction>())
         {
             var shift = Shifts[dir];
-            var next = new P(start.Y + shift.Y, start.X + shift.X);
+            var next = new P(start.Row + shift.Row, start.Col + shift.Col);
             var nextChar = SafeGet(arr, next);
             if (nextChar == '.') continue;
             if (CanBeConnectedFrom(dir, nextChar))
@@ -149,22 +120,6 @@ public class Day10 : BaseDay
         }
 
         return dirs;
-    }
-
-
-    char SafeGet(char[][] arr, P point)
-    {
-        if (point.X < 0 || point.X >= arr[0].Length)
-        {
-            return '.';
-        }
-
-        if (point.Y < 0 || point.Y >= arr.Length)
-        {
-            return '.';
-        }
-
-        return arr[point.Y][point.X];
     }
 
 
@@ -186,14 +141,14 @@ public class Day10 : BaseDay
 
     PD MoveInPipe(char[][] arr, P point, Direction arriveFrom)
     {
-        var current = arr[point.Y][point.X];
+        var current = arr[point.Row][point.Col];
         var curMoveDirections = PipeConnectionTypes[current];
         foreach (var dir in Enum.GetValues<Direction>())
         {
             if (curMoveDirections.HasFlag(dir))
             {
                 var shift = Shifts[dir];
-                var next = new P(point.Y + shift.Y, point.X + shift.X);
+                var next = new P(point.Row + shift.Row, point.Col + shift.Col);
                 var nextChar = SafeGet(arr, next);
                 if (nextChar == '.') continue;
                 if (CanBeConnectedFrom(dir, nextChar) && dir != arriveFrom)
