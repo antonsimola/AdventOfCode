@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using System.Reflection.Metadata;
-
 namespace AdventOfCode2023;
 
 using static GridMovement;
@@ -10,177 +7,107 @@ public class Day17 : BaseDay
     record Vertex(P From, P To, int Weight);
 
     record PDC(P Point, Direction? Direction, int Count);
-    
+
 
     public override void Run()
     {
         var input = Input;
         // var input = TestInput;
+
+//         var input = """
+// 111111111111
+// 999999999991
+// 999999999991
+// 999999999991
+// 999999999991
+// """.Trim().Split("\r\n");
+        
         var grid = input.Select(c => c.Select(c => c - '0').ToArray()).ToArray();
 
         var vertices = GetVertices(grid);
         var nodeVertices = vertices.GroupBy(v => v.From).ToDictionary(v => v.Key, v => v.ToList());
 
         var res = ShortestPath(grid, nodeVertices, new P(0, 0), new P(grid.Length - 1, grid[0].Length - 1));
-        Visualize(grid, res.path);
-
         Console.WriteLine(res.Item1);
     }
 
-    private void Visualize(int[][] grid, List<P> res)
-    {
-        Console.Clear();
-        for (int r = 0; r < grid.Length; r++)
-        {
-            for (int c = 0; c < grid[0].Length; c++)
-            {
-                if (res.Contains(new P(r, c)))
-                {
-                    var def = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(grid[r][c]);
-                    Console.ForegroundColor = def;
-                }
-                else
-                {
-                    Console.Write(grid[r][c]);
-                }
-            }
-
-            Console.WriteLine();
-        }
-    }
-
-    // private void GreedyShortestPath(int[][] grid, Dictionary<P, List<Vertex>> vertices, P from, P goal, State state)
-    // {
-    //
-    //     var cur = from;
-    //     while (true)
-    //     {
-    //         var connections = vertices[cur];
-    //         foreach (var con in connections.OrderBy(c => c.Weight))
-    //         {
-    //             
-    //             GreedyShortestPath(grid, vertices, con.To, goal, state with {SumWeight = state.SumWeight + con.Weight});
-    //         }
-    //     }
-    // }
-
-
     private (int, List<P> path) ShortestPath(int[][] grid, Dictionary<P, List<Vertex>> vertices, P from, P goal)
     {
-        var startPdc = new PDC(from, null, 0);
+        var startPdc = new PDC(from, Direction.South, 0);
+        var startPdc2 = new PDC(from, Direction.East , 0);
         var pQueue = new PriorityQueue<PDC, int>();
         var minCostToStart = new Dictionary<PDC, int>() { { startPdc, 0 } };
         var nearestToStart = new Dictionary<PDC, PDC>();
         var visited = new HashSet<PDC>();
         pQueue.Enqueue(startPdc, 0);
-        while (true)
+        pQueue.Enqueue(startPdc2 , 0);
+        while (pQueue.TryDequeue(out var cur, out var heatLoss))
         {
-            var cur = pQueue.Dequeue();
             var connections = vertices[cur.Point];
             foreach (var con in connections.OrderBy(c => c.Weight))
             {
-             
-                var dir = ShiftToEnum[con.To - con.From];
+                var shift = con.To - con.From;
+                var dir = ShiftToEnum[shift];
                 if (cur.Direction != null && dir == Opposites[cur.Direction.Value]) continue;
+
+                var sameDir = cur.Direction != null && cur.Direction == dir;
                 
-                var pdc = new PDC(con.To, dir, cur.Direction == dir ? cur.Count +1 : 0) ;
-                if (visited.Contains(pdc)) continue;
+                if (cur.Count > 9 && sameDir) continue;
+                if (cur.Count < 4 && cur.Direction != null && !sameDir) continue;
                 
-                if (pdc.Count > 2) continue;
-                
+                var pdc = new PDC(con.To, dir, sameDir ? cur.Count + 1 : 1);
+                // if (visited.Contains(pdc)) continue;
+
                 var minCostToStartCur = minCostToStart.GetValueOrDefault(cur, 0);
                 var minCostToStartNext = minCostToStart.GetValueOrDefault(pdc, -1);
-                if (minCostToStartNext == -1 || minCostToStartCur + con.Weight < minCostToStartNext)
+
+                var weight = con.Weight;
+                if (minCostToStartNext == -1 || minCostToStartCur + weight < minCostToStartNext)
                 {
-                    
-                    minCostToStart[pdc] = minCostToStartCur + con.Weight;
+                    minCostToStart[pdc] = minCostToStartCur + weight;
                     nearestToStart[pdc] = cur;
-                    
-                    pQueue.Enqueue(pdc, minCostToStartCur + con.Weight);
+
+                    pQueue.Enqueue(pdc, minCostToStartCur + weight);
                 }
             }
-    
+
             visited.Add(cur);
-            if (cur.Point == goal)
-            {
-                break;
-            }
-    
-            if (pQueue.Count == 0)
-            {
-                break;
-            }
         }
-    
-        // var thepath = new List<P>() { goal };
-        // var n = goal;
-        // while (true)
-        // {
-        //     if (n == from) break;
-        //     n = nearestToStart[n];
-        //     thepath.Add(n);
-        // }
-        //
-        // thepath.Reverse();
-    
-    
-        // return (minCostToStart[goal], thepath);
 
+        //MakePath(nearestToStart, goal);
+
+        foreach (var VARIABLE in minCostToStart
+                     .Where(k => k.Key.Point == goal)
+                     .OrderBy(k => k.Key.Point.Row)
+                     .ThenBy(k => k.Key.Point.Col))
+        {
+            Console.WriteLine(VARIABLE);
+        }
         
-        return (minCostToStart.Where(b => b.Key.Point == goal).Min(b => b.Value), new List<P>());
-        
-        return (0, new List<P>());
+
+        return (minCostToStart.Where(b => b.Key.Point == goal).Where(g => g.Key.Count > 3 ).Min(b => b.Value), new List<P>());
     }
-
-    private bool CheckBackwards(int[][]grid, Dictionary<P, P> nearestToStart, P from, P conTo)
+    
+    private (int, P) JumpWeight(int[][] grid, P curPos, P shift, int times)
     {
-        var thepath = new List<P>() { conTo };
-        var n = conTo;
-        while (true)
+        var sum = 0;
+        var cur = curPos;
+        for (var i = 0; i < times; i++)
         {
-            if (n == from) break;
-            n = nearestToStart[n];
-            thepath.Add(n);
-        }
+            cur += shift;
 
-        thepath.Reverse();
-        
-        // Visualize(grid, thepath);
-        
-        var sameCount = 0;
-        Direction? prevDir = null;
-        
-        
-        
-        foreach (var p in thepath.Zip(thepath.Skip(1)))
-        {
-            var prev = p.First;
-            var cur = p.Second;
-            var shift =   ShiftToEnum[cur - prev];
-            if (prevDir != null && shift  == Opposites[prevDir.Value])
+            if (cur.Row < 0 || cur.Row >= grid.Length || cur.Col < 0 ||
+                cur.Col >= grid[0].Length)
             {
-                return false;
+                continue;
             }
 
-            if (prevDir == null || shift == prevDir)
-            {
-                sameCount++;
-                if (sameCount > 3)
-                {
-                    return false;
-                }
-            }
-
-            prevDir = shift;
+            sum += grid[cur.Row][cur.Col];
         }
 
-        return true;
+        return (sum, curPos);
     }
 
-
-    
 
     private List<Vertex> GetVertices(int[][] grid)
 
