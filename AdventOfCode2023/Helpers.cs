@@ -128,4 +128,21 @@ public static class Helpers
 
         return columnWise.ToArray();
     }
+
+    public static long PolygonAreaShoelace(List<PL> points)
+    {
+        long sum = 0;
+        points = [..points, points[0]];
+        for (var i = 0; i < points.Count - 1; i++)
+        {
+            sum += (points[i].Row * points[i + 1].Col - points[i + 1].Row * points[i].Col);
+        }
+
+        return Math.Abs(sum / 2);
+    }
+
+    public static long PolygonPickTheoremInnerPointCount(long perimeter, long area)
+    {
+        return area - perimeter / 2 + 1;
+    }
 }

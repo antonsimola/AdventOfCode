@@ -11,6 +11,34 @@ public enum Direction
     West = 1 << 3
 }
 
+public record PL(long Row, long Col)
+{
+    public static implicit operator PL(ValueTuple<long, long> tuple)
+    {
+        return new PL(tuple.Item1, tuple.Item2);
+    }
+
+    public static PL operator -(PL p1, PL p2)
+    {
+        return new PL(p1.Row - p2.Row, p1.Col - p2.Col);
+    }
+
+    public static PL operator +(PL p1, PL p2)
+    {
+        return new PL(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PL operator +(PL p1, P p2)
+    {
+        return new PL(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PL operator *(PL p1, int mul)
+    {
+        return new PL(p1.Row *mul , p1.Col * mul);
+    }
+}; //bleh...
+
 public record P(int Row, int Col)
 {
     public static implicit operator P(ValueTuple<int, int> tuple)
@@ -26,6 +54,11 @@ public record P(int Row, int Col)
     public static P operator +(P p1, P p2)
     {
         return new P(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static P operator *(P p1, int mul)
+    {
+        return new P(p1.Row *mul , p1.Col * mul);
     }
 }; //bleh...
 
