@@ -24,10 +24,7 @@ public class Day16 : BaseDay
         char[][] grid = input.Select(i => i.ToArray()).ToArray();
 
         var max = 0;
-
-        var startPos = GenerateStartPds(grid).ToList();
-
-
+        
         foreach (var startingPd in GenerateStartPds(grid))
         {
             var paths = new List<Path>() { new Path { Steps = [startingPd] } };
