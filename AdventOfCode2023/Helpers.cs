@@ -145,4 +145,22 @@ public static class Helpers
     {
         return area - perimeter / 2 + 1;
     }
+    
+   public static long LeastCommonMultiple(List<long> args)
+    {
+        return args.Aggregate(LeastCommonMultiple);
+    }
+
+
+    public static long GreatestCommonDivisor(long a, long b)
+    {
+        if (a == 0)
+            return b;
+        return GreatestCommonDivisor(b % a, a);
+    }
+
+    public static long LeastCommonMultiple(long a, long b)
+    {
+        return (a / GreatestCommonDivisor(a, b)) * b;
+    }
 }

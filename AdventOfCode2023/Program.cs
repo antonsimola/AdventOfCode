@@ -7,7 +7,7 @@ public class Program
     public static void Main(string[] args)
     {
         var day = DateTime.Now.Day;
-// var day = 12;
+        // var day = 20;
         var allDays = Assembly.GetExecutingAssembly().GetExportedTypes()
             .Where(t => t.IsAssignableTo(typeof(BaseDay)))
             .Where(t => !t.IsAbstract)
