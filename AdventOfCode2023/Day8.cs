@@ -76,24 +76,8 @@ public class Day8 : BaseDay
             mins.Add(count);
         }
 
-        WriteLine(LeastCommonMultiple(mins));
+        WriteLine(Helpers.LeastCommonMultiple(mins));
     }
 
-    static long LeastCommonMultiple(List<long> args)
-    {
-        return args.Aggregate(LeastCommonMultiple);
-    }
-
-
-    static long GreatestCommonDivisor(long a, long b)
-    {
-        if (a == 0)
-            return b;
-        return GreatestCommonDivisor(b % a, a);
-    }
-
-    static long LeastCommonMultiple(long a, long b)
-    {
-        return (a / GreatestCommonDivisor(a, b)) * b;
-    }
+   
 }
