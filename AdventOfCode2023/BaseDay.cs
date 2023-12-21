@@ -42,6 +42,7 @@ public abstract class BaseDay
         var codeNodes = doc.DocumentNode.QuerySelectorAll("pre>code");
         var innerTexts = codeNodes
             .Select(n => n.InnerText)
+            .Select(HtmlEntity.DeEntitize)
             .Select(t => t.Split("\n"))
             .Select(splitted => splitted.LastOrDefault() == "" ? splitted[..^1] : splitted)
             .ToList();
