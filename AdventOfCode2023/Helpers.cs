@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Numerics;
 using System.Text;
 
 namespace AdventOfCode2023;
@@ -145,8 +146,8 @@ public static class Helpers
     {
         return area - perimeter / 2 + 1;
     }
-    
-   public static long LeastCommonMultiple(List<long> args)
+
+    public static long LeastCommonMultiple(List<long> args)
     {
         return args.Aggregate(LeastCommonMultiple);
     }
@@ -162,5 +163,34 @@ public static class Helpers
     public static long LeastCommonMultiple(long a, long b)
     {
         return (a / GreatestCommonDivisor(a, b)) * b;
+    }
+
+    public static (BigInteger X , BigInteger Y)? LineIntercect(PB l1p1, PB l1p2, PB l2p1, PB l2p2)
+    {
+        checked
+        {
+            BigInteger denom = (l1p1.Row - l1p2.Row) * (l2p1.Col - l2p2.Col) - (l1p1.Col - l1p2.Col) * (l2p1.Row - l2p2.Row);
+            if (denom == 0) return null;
+            var pxNom = (l1p1.Row * l1p2.Col - l1p1.Col * l1p2.Row) * (l2p1.Row - l2p2.Row) -
+                        (l1p1.Row - l1p2.Row) * (l2p1.Row * l2p2.Col - l2p1.Col * l2p2.Row);
+            var pyNom = (l1p1.Row * l1p2.Col - l1p1.Col * l1p2.Row) * (l2p1.Col - l2p2.Col) -
+                        (l1p1.Col - l1p2.Col) * (l2p1.Row * l2p2.Col - l2p1.Col * l2p2.Row);
+            
+            return (pxNom / denom, pyNom /  denom);    
+        }
+        
+    }
+
+    public static double PointDistance((decimal Row, decimal Col) p1, PDe p2)
+    {
+        checked
+        {
+            return Math.Sqrt(Math.Pow((double)p2.Row - (double)p1.Row, 2) + Math.Pow((double)p2.Col - (double)p1.Col, 2));    
+        }
+    }
+
+    public static decimal DotProduct(PDe p1, PDe p2)
+    {
+        return p1.Row * p2.Row + p1.Col * p2.Col;
     }
 }

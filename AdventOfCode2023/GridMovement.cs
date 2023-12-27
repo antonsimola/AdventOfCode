@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode2023;
+﻿using System.Numerics;
+
+namespace AdventOfCode2023;
 
 using static Direction;
 
@@ -10,6 +12,82 @@ public enum Direction
     South = 1 << 2,
     West = 1 << 3
 }
+
+public record PB(BigInteger Row, BigInteger Col)
+{
+    public static implicit operator PB(ValueTuple<BigInteger, BigInteger> tuple)
+    {
+        return new PB(tuple.Item1, tuple.Item2);
+    }
+
+    public static PB operator -(PB p1, PB p2)
+    {
+        return new PB(p1.Row - p2.Row, p1.Col - p2.Col);
+    }
+
+    public static PB operator +(PB p1, PB p2)
+    {
+        return new PB(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PB operator +(PB p1, P p2)
+    {
+        return new PB(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PB operator *(PB p1, int mul)
+    {
+        return new PB(p1.Row *mul , p1.Col * mul);
+    }
+}; //bleh...
+
+public record PB3(BigInteger Row, BigInteger Col, BigInteger Z)
+{
+    public static implicit operator PB3(ValueTuple<BigInteger, BigInteger, BigInteger> tuple)
+    {
+        return new PB3(tuple.Item1, tuple.Item2, tuple.Item3);
+    }
+
+    public static PB3 operator -(PB3 p1, PB3 p2)
+    {
+        return new PB3(p1.Row - p2.Row, p1.Col - p2.Col, p1.Z - p2.Z);
+    }
+
+    public static PB3 operator +(PB3 p1, PB3 p2)
+    {
+        return new PB3(p1.Row + p2.Row, p1.Col + p2.Col, p1.Z + p2.Z);
+    }
+    
+}; //bleh...
+
+public record PDe(decimal Row, decimal Col)
+{
+    public static implicit operator PDe(ValueTuple<decimal, decimal> tuple)
+    {
+        return new PDe(tuple.Item1, tuple.Item2);
+    }
+
+    public static PDe operator -(PDe p1, PDe p2)
+    {
+        return new PDe(p1.Row - p2.Row, p1.Col - p2.Col);
+    }
+
+    public static PDe operator +(PDe p1, PDe p2)
+    {
+        return new PDe(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PDe operator +(PDe p1, P p2)
+    {
+        return new PDe(p1.Row + p2.Row, p1.Col + p2.Col);
+    }
+    
+    public static PDe operator *(PDe p1, int mul)
+    {
+        return new PDe(p1.Row *mul , p1.Col * mul);
+    }
+}; //bleh...
+
 
 public record PL(long Row, long Col)
 {
