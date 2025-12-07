@@ -7,7 +7,7 @@ public class Program
     public static void Main(string[] args)
     {
         BaseDay.Year = 2025;
-        var dayType = Runner.FindDayType(6);
+        var dayType = Runner.FindDayType();
         Runner.RunDay(dayType);
     }
 }
