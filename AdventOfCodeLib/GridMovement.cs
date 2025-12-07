@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace AdventOfCode2023;
+namespace AdventOfCodeLib;
 
 using static Direction;
 

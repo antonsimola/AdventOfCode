@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using AdventOfCodeLib;
 
 namespace AdventOfCode2023;
 

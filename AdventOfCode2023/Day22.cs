@@ -1,6 +1,7 @@
 using System.IO.Compression;
 using System.Runtime.Intrinsics.X86;
 using System.Threading.Channels;
+using AdventOfCodeLib;
 
 namespace AdventOfCode2023;
 

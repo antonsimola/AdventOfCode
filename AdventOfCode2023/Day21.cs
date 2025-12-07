@@ -1,3 +1,5 @@
+using AdventOfCodeLib;
+
 namespace AdventOfCode2023;
 
 using static GridMovement;

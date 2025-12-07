@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using AdventOfCodeLib;
 
 namespace AdventOfCode2023;
 

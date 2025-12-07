@@ -1,5 +1,6 @@
+using AdventOfCodeLib;
 using MathNet.Spatial.Euclidean;
-using static AdventOfCode2023.Helpers;
+using static AdventOfCodeLib.Helpers;
 
 namespace AdventOfCode2023;
 

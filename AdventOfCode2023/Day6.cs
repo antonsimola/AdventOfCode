@@ -1,3 +1,5 @@
+using AdventOfCodeLib;
+
 namespace AdventOfCode2023;
 
 public class Day6 : BaseDay

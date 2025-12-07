@@ -2,13 +2,14 @@
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
 
-namespace AdventOfCode2023;
+namespace AdventOfCodeLib;
 
 public abstract class BaseDay
 {
     public string[] TestInput;
     public List<string[]> AllTestInputs;
     public string[] Input;
+    public static int Year { get; set; }
 
     public abstract void Run();
 
@@ -74,7 +75,7 @@ public abstract class BaseDay
 
     private string[] LoadFile(int day, string fileName)
     {
-        var year = 2023;
+        var year = Year;
         var loc = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var p = Path.Combine(loc, "input", year + "", day + "", fileName);
         if (!File.Exists(p) && fileName == "input.txt")

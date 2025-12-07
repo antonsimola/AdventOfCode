@@ -2,7 +2,7 @@
 using System.Numerics;
 using System.Text;
 
-namespace AdventOfCode2023;
+namespace AdventOfCodeLib;
 
 public static class Helpers
 {

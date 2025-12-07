@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Channels;
+using AdventOfCodeLib;
 using MathNet.Numerics;
 
 namespace AdventOfCode2023;

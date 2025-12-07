@@ -1,3 +1,4 @@
+using AdventOfCodeLib;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace AdventOfCode2023;

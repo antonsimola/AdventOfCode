@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Text.RegularExpressions;
+using AdventOfCodeLib;
 using MathNet.Numerics;
 
 namespace AdventOfCode2023;
@@ -20,7 +21,7 @@ public class Day12 : BaseDay
         var cache = new Dictionary<string, IList<string>>();
 
         var reg = new Regex("([?]*)");
-        
+
         for (var i = 1; i < 15; i++)
         {
             Console.WriteLine(i);
@@ -44,21 +45,52 @@ public class Day12 : BaseDay
             //
             // Console.WriteLine(max);
             // globalmax = Math.Max(globalmax, max);
-            
-            
-            
-            var checksQ = new Queue<int>(checks);
-            
-            var ways = records.Split(".");
 
-            var sum = 0;
-             
-            foreach (var w in ways)
+            // on i-th char, group the brokens by count
+            var dict = new Dictionary<int, Dictionary<int, int>>();
+            
+            Action<int, Transition> counter = (i, transition) =>
             {
-                 Generate(w, cache);
-                 
-            }
-            grandSum += sum;
+                if (transition.From == "intact" && transition.To == "broken")
+                {
+                }
+              
+                else if (transition.From == "broken" && transition.To == "intact")
+                {
+                }
+
+                else if (transition.From == "intact" && transition.To == "intact")
+                {
+                }
+                else if (transition.From == "broken" && transition.To == "broken")
+                {
+                }
+            };
+
+            new StateMachinery(["intact", "broken"], ['?', '.', '#'], [
+                new Transition("intact", '.', "intact", counter),
+                new Transition("intact", '#', "broken", counter),
+                new Transition("intact", '?', "broken", counter),
+                new Transition("intact", '?', "intact", counter),
+                new Transition("broken", '.', "intact", counter),
+                new Transition("broken", '#', "broken", counter),
+                new Transition("broken", '?', "intact", counter),
+                new Transition("broken", '?', "broken", counter),
+            ], "intact", []);
+
+
+            // var checksQ = new Queue<int>(checks);
+            //
+            // var ways = records.Split(".");
+            //
+            // var sum = 0;
+            //  
+            // foreach (var w in ways)
+            // {
+            //      Generate(w, cache);
+            //      
+            // }
+            // grandSum += sum;
         }
 
         Console.WriteLine("--------");
@@ -90,12 +122,12 @@ public class Day12 : BaseDay
 
         else if (s[0] == '#')
         {
-            
             var i = 0;
             while (i < s.Length && s[i] == '#')
             {
                 i++;
             }
+
             if (i == s.Length || (s[i] == '.' && i == checksQ.Peek()))
             {
                 var newQ = new Queue<int>(checksQ);
@@ -104,7 +136,6 @@ public class Day12 : BaseDay
             }
             else
             {
-                
                 sum += RecCheck(s[i..], checksQ, cache);
             }
         }

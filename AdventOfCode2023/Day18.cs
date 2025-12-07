@@ -1,8 +1,9 @@
 using System.Runtime.InteropServices.ComTypes;
+using AdventOfCodeLib;
 using MathNet.Numerics.Interpolation;
 using MathNet.Numerics.Optimization;
 using MathNet.Spatial.Euclidean;
-using static AdventOfCode2023.Direction;
+using static AdventOfCodeLib.Direction;
 
 namespace AdventOfCode2023;
 

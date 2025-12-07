@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Combinatorics" Version="2.0.0" />
+      <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+      <PackageReference Include="HtmlAgilityPack.CssSelectors.NetCore" Version="1.2.1" />
+      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+      <PackageReference Include="MathNet.Spatial" Version="0.6.0" />
+    </ItemGroup>
+
+</Project>

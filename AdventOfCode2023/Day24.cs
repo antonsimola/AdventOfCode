@@ -1,4 +1,5 @@
 using System.Numerics;
+using AdventOfCodeLib;
 using Combinatorics.Collections;
 
 
@@ -39,7 +40,7 @@ public class Day24 : BaseDay
             var line2 = pairs[1];
 
             var p = Helpers.LineIntercect(line1.Item1, line1.Item2, line2.Item1, line2.Item2);
-            
+
             if (p != null)
             {
                 var pV = p.Value;
@@ -48,18 +49,15 @@ public class Day24 : BaseDay
                 var betweenLine1 = pde - line1.Item1;
                 var betweenLine2 = pde - line2.Item1;
 
-                 
-                var sameDir1 = betweenLine1.Row > 0 == line1.Item3.Row > 0  && betweenLine1.Col > 0 == line1.Item3.Col > 0  ;
-                var sameDir2 = betweenLine2.Row > 0 == line2.Item3.Row > 0  && betweenLine2.Col > 0 == line2.Item3.Col > 0  ;
-                
-                
 
-
-             
+                var sameDir1 = betweenLine1.Row > 0 == line1.Item3.Row > 0 &&
+                               betweenLine1.Col > 0 == line1.Item3.Col > 0;
+                var sameDir2 = betweenLine2.Row > 0 == line2.Item3.Row > 0 &&
+                               betweenLine2.Col > 0 == line2.Item3.Col > 0;
 
                 if (!sameDir1 || !sameDir2)
                 {
-                    Console.WriteLine("Past " + line1.Item1 + " " + line2.Item1);
+                    // Console.WriteLine("Past " + line1.Item1 + " " + line2.Item1);
                     continue;
                 }
 
@@ -68,21 +66,19 @@ public class Day24 : BaseDay
                     pV.X <= maxX &&
                     minY <= pV.Y &&
                     pV.Y <= maxY
-                  
                 )
                 {
-                    Console.WriteLine("OK " + line1.Item1 + " " + line2.Item1);
+                    // Console.WriteLine("OK " + line1.Item1 + " " + line2.Item1);
                     sum += 1;
-                    
                 }
                 else
                 {
-                    Console.WriteLine("OUTSIDE " + line1.Item1 + " " + line2.Item1);
+                    // Console.WriteLine("OUTSIDE " + line1.Item1 + " " + line2.Item1);
                 }
             }
             else
             {
-                Console.WriteLine("PARALLEL " + line1.Item1 + " " + line2.Item1);
+                // Console.WriteLine("PARALLEL " + line1.Item1 + " " + line2.Item1);
             }
         }
 
