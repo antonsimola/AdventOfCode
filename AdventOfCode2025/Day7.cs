@@ -1,3 +1,4 @@
+using System.Numerics;
 using AdventOfCodeLib;
 
 namespace AdventOfCode2025;
@@ -9,7 +10,7 @@ public class Day7 : BaseDay
         var input = Input;
         // var input = TestInput;
 
-        var beams = new bool[input[0].Length];
+        var beams = new BigInteger[input[0].Length];
         var splitCount = 0;
         foreach (var line in input)
         {
@@ -20,19 +21,19 @@ public class Day7 : BaseDay
 
                 if (ch == 'S')
                 {
-                    beams[i] = true;
+                    beams[i]++;
                 }
-                else if (ch == '^' && beams[i])
+                else if (ch == '^')
                 {
-                    beams[i - 1] = true;
-                    beams[i] = false;
-                    beams[i+1] = true;
-                    splitCount += 1;
+                    var prev = beams[i];
+                    beams[i - 1] += prev;
+                    beams[i] = 0;
+                    beams[i+1] += prev;
                 }
             }
         }
 
-        Console.WriteLine(splitCount);
+        Console.WriteLine(beams.Aggregate((acc,cur) => acc + cur));
     }
 }
  
